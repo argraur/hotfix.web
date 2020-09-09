@@ -133,7 +133,6 @@ const Basket = ({ match: { params: { areaId, itemId }}, foodAreas, order }) => {
             onChange={event => {
               setFaster(false);
               setTime(event.target.value);
-              console.log(event.target.value)
               localStorage.setItem('faster', false)
               localStorage.setItem('time', event.target.value)
             }}
