@@ -9,7 +9,7 @@ import './place.css';
 
 
 const Basket = ({ match: { params: { areaId, itemId }}, foodAreas, order }) => {
-  const [ faster, setFaster ] = useState(localStorage.getItem('faster') === 'true');
+  const [ faster, setFaster ] = useState(localStorage.getItem('faster') !== null ? localStorage.getItem('faster') === 'true' : true);
   const [ time, setTime ] = useState(localStorage.getItem('time'));
   const [ selfService, setSelfService ] = useState(localStorage.getItem('selfService') === 'true');
   const area = foodAreas.filter(area => area.id === areaId)[0];
@@ -162,7 +162,11 @@ const Basket = ({ match: { params: { areaId, itemId }}, foodAreas, order }) => {
         </div>
       </div>
       <footer className="Place__footer">
-        <Link to={`/order/${area.id}/${item.id}`} className="Place__order">
+        <Link to={`/order/${area.id}/${item.id}`} className="Place__order" onClick={() => {
+          localStorage.setItem('selfService', false)
+          localStorage.setItem('time', '')
+          localStorage.setItem('faster', true)
+        }}>
           Оплатить {price}
         </Link>
       </footer>
